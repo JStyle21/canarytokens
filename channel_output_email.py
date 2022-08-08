@@ -13,6 +13,7 @@ from channel import OutputChannel
 from constants import OUTPUT_CHANNEL_EMAIL
 import sendgrid
 from sendgrid.helpers.mail import *
+from mailjet_rest import Client
 from email.MIMEText import MIMEText
 import smtplib
 
@@ -117,6 +118,8 @@ class EmailOutputChannel(OutputChannel):
             self.mandrill_send(msg=msg,canarydrop=canarydrop)
         elif settings.SENDGRID_API_KEY:
             self.sendgrid_send(msg=msg,canarydrop=canarydrop)
+        elif settings.MAILJET_API_KEY and settings.MAILJET_API_SECRET:
+            self.mailjet_send(msg=msg,canarydrop=canarydrop)
         elif settings.SMTP_SERVER:
             self.smtp_send(msg=msg,canarydrop=canarydrop)
         else:
@@ -152,7 +155,41 @@ class EmailOutputChannel(OutputChannel):
             log.error('A mailgun error occurred: %s - %s' % (e.__class__, e))
 
 
+    def mailjet_send(self, msg=None, canarydrop=None):
+        try:
+            mailjet_client = Client(auth=(settings.MAILJET_API_KEY, settings.MAILJET_API_SECRET), version='v3.1')
+            message = {
+                'Messages': [
+                {
+                "From": {
+                "Email": msg['from_address'],
+                "Name": msg['from_display']
+                },
+                "To": [
+                {
+                "Email": [{'email': canarydrop['alert_email_recipient'],
+                "Name": ""
+                }]
+                ],
+                "Subject": msg['subject'],
+                "TextPart": msg['body'],
+                "HTMLPart": self.format_report_html()
+                }]}
+                }
+            if settings.DEBUG:
+                pprint.pprint(message)
+            else:
+                result = mailjet.send.create(data=data)
+                
+            log.info('Sent alert to {recipient} for token {token}'\
+                        .format(recipient=canarydrop['alert_email_recipient'],
+                                token=canarydrop.canarytoken.value()))
 
+        except Exception, e:
+            log.error('A mailjet error occurred: %s - %s' % (e.__class__, e))
+
+            
+            
     def mandrill_send(self, msg=None, canarydrop=None):
         try:
             mandrill_client = mandrill.Mandrill(settings.MANDRILL_API_KEY)
