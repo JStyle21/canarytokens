@@ -159,21 +159,24 @@ class EmailOutputChannel(OutputChannel):
         try:
             mailjet_client = Client(auth=(settings.MAILJET_API_KEY, settings.MAILJET_API_SECRET), version='v3.1')
             message = {
-                'Messages': [{
-                "From": {
-                "Email": msg['from_address'],
-                "Name": msg['from_display']
-                },
-                "To": [{
-                "Email": [{'email': canarydrop['alert_email_recipient'],
-                "Name": ""
-                }]
-                ],
-                "Subject": msg['subject'],
-                "TextPart": msg['body'],
-                "HTMLPart": self.format_report_html()
-                }]}
-             }
+                'Messages': [
+                    {
+                        "From": {
+                            "Email": msg['from_address'],
+                            "Name": msg['from_display']
+                        },
+                        "To": [
+                            {
+                                "Email": canarydrop['alert_email_recipient'],
+                                "Name": ""
+                            }
+                        ],
+                        "Subject": msg['subject'],
+                        "TextPart": msg['body'],
+                        "HTMLPart": self.format_report_html()
+                    }
+                ]
+            }
             if settings.DEBUG:
                 pprint.pprint(message)
             else:
