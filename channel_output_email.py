@@ -157,7 +157,7 @@ class EmailOutputChannel(OutputChannel):
 
     def mailjet_send(self, msg=None, canarydrop=None):
         try:
-            mailjet_client = Client(auth=(settings.MAILJET_API_KEY, settings.MAILJET_API_SECRET), version='v3.1')
+            mailjet = Client(auth=(settings.MAILJET_API_KEY, settings.MAILJET_API_SECRET), version='v3.1')
             message = {
                 'Messages': [
                     {
