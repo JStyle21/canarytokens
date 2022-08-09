@@ -610,7 +610,7 @@ class HistoryPage(resource.Resource):
     
     def datetime_from_utc_to_local(utc_datetime):
         now_timestamp = time.time()
-        offset = datetime.fromtimestamp(now_timestamp) - datetime.utcfromtimestamp(now_timestamp)
+        offset = datetime.datetime.fromtimestamp(now_timestamp) - datetime.datetime.utcfromtimestamp(now_timestamp)
         return utc_datetime + offset
 
     def render_GET(self, request):
