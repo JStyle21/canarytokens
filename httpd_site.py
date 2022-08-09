@@ -626,12 +626,11 @@ class HistoryPage(resource.Resource):
                     
                     #formatted_timestamp = datetime.datetime.fromtimestamp(
                                 #float(datetime_from_utc_to_local(timestamp))).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
-                    formatted_timestamp = datetime.datetime.fromtimestam(datetime_from_utc_to_local(float(timestamp))).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
-                    #formatted_timestamp = datetime.datetime.fromtimestamp(
-                                #float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
+                    #formatted_timestamp = datetime.datetime.fromtimestam(datetime_from_utc_to_local(float(timestamp))).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
+                    formatted_timestamp = datetime.datetime.fromtimestamp(
+                                float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC3)')
 
-                    canarydrop['triggered_list'][timestamp] = canarydrop['triggered_list'].pop(timestamp)
-                    #canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
+                    canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
 
             if canarydrop.get('memo'):
                 canarydrop['memo'] = unicode(canarydrop['memo'], "utf8")
