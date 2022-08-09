@@ -607,6 +607,11 @@ class HistoryPage(resource.Resource):
         if name == '':
             return self
         return Resource.getChild(self, name, request)
+    
+    def datetime_from_utc_to_local(utc_datetime):
+        now_timestamp = time.time()
+        offset = datetime.fromtimestamp(now_timestamp) - datetime.utcfromtimestamp(now_timestamp)
+        return utc_datetime + offset
 
     def render_GET(self, request):
         try:
@@ -618,8 +623,9 @@ class HistoryPage(resource.Resource):
                 raise NoCanarytokenPresent()
             if canarydrop.get('triggered_list', None):
                 for timestamp in canarydrop['triggered_list'].keys():
-                    formatted_timestamp = datetime.datetime.fromtimestamp(
-                                float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
+                    formatted_timestamp = datetime_from_utc_to_local(timestamp).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
+                    #formatted_timestamp = datetime.datetime.fromtimestamp(
+                                #float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
 
                     canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
 
