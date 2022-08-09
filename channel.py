@@ -3,7 +3,6 @@ Base class for all canarydrop channels.
 """
 
 import datetime
-import time
 
 import simplejson
 
@@ -84,7 +83,6 @@ class InputChannel(Channel):
     def format_canaryalert(self, canarydrop=None, protocol=settings.PROTOCOL,
                            host=settings.PUBLIC_DOMAIN, params=None, **kwargs):
         msg = {}
-        TIME_FORMAT = time.strftime("%d-%m-%Y %H:%M:%S")
         if not host or host == '':
             host=settings.PUBLIC_IP
 
@@ -100,8 +98,7 @@ class InputChannel(Channel):
         if 'src_ip' in kwargs:
             msg['src_ip'] = kwargs['src_ip']
 
-        msg['time'] = TIME_FORMAT
-        #msg['time'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S (UTC)")
+        msg['time'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S (UTC)")
         msg['channel'] = self.name
 
         if 'src_data' in kwargs and 'aws_keys_event_source_ip' in kwargs['src_data']:
