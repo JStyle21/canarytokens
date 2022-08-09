@@ -621,7 +621,7 @@ class HistoryPage(resource.Resource):
             if canarydrop.get('triggered_list', None):
                 for timestamp in canarydrop['triggered_list'].keys():
 
-                    utc = datetime.datetime.fromtimestamp(float(utc_datetime_timestamp))
+                    utc = datetime.datetime.fromtimestamp(float(timestamp))
                     utc = utc.replace(tzinfo=from_zone)
                     formatted_timestamp = utc.astimezone(to_zone).strftime('%d %b %Y %H:%M:%S.%f')
                     
