@@ -600,7 +600,7 @@ class ManagePage(resource.Resource):
                                         settings=settings).encode('utf8')
 
 class HistoryPage(resource.Resource):
-    isLeaf = 
+    isLeaf = True
     
     def datetime_from_utc_to_local(utc_datetime):
         now_timestamp = time.time()
@@ -622,7 +622,7 @@ class HistoryPage(resource.Resource):
             if canarydrop.get('triggered_list', None):
                 for timestamp in canarydrop['triggered_list'].keys():
                     formatted_timestamp = datetime.datetime.fromtimestamp(
-                                float(datetime_from_utc_to_local(timestamp))).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
+                                float(datetime_from_utc_to_local(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
                     canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
 
             if canarydrop.get('memo'):
