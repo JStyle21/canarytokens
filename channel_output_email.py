@@ -180,7 +180,7 @@ class EmailOutputChannel(OutputChannel):
             if settings.DEBUG:
                 pprint.pprint(message)
             else:
-                result = mailjet.send.create(data=data)
+                result = mailjet.send.create(data=message)
                 
             log.info('Sent alert to {recipient} for token {token}'\
                         .format(recipient=canarydrop['alert_email_recipient'],
