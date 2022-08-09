@@ -611,8 +611,7 @@ class HistoryPage(resource.Resource):
 
     def render_GET(self, request):
         try:
-            from_zone = tz.tzutc()
-            to_zone = tz.tzlocal()
+
             token = request.args.get('token', None)[0]
             auth  = request.args.get('auth', None)[0]
             canarydrop = Canarydrop(**get_canarydrop(canarytoken=token))
@@ -620,7 +619,8 @@ class HistoryPage(resource.Resource):
                 raise NoCanarytokenPresent()
             if canarydrop.get('triggered_list', None):
                 for timestamp in canarydrop['triggered_list'].keys():
-
+                    from_zone = tz.tzutc()
+                    to_zone = tz.tzlocal()
                     utc = datetime.datetime.fromtimestamp(float(timestamp))
                     utc = utc.replace(tzinfo=from_zone)
                     formatted_timestamp = utc.astimezone(to_zone).strftime('%d %b %Y %H:%M:%S.%f')
