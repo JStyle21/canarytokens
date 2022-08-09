@@ -16,6 +16,7 @@ from sendgrid.helpers.mail import *
 from mailjet_rest import Client
 from email.MIMEText import MIMEText
 import smtplib
+import time
 
 try:
     # Python 3
@@ -28,7 +29,8 @@ class EmailOutputChannel(OutputChannel):
     CHANNEL = OUTPUT_CHANNEL_EMAIL
 
     DESCRIPTION = 'Canarytoken triggered'
-    TIME_FORMAT = '%Y-%m-%d %H:%M:%S (UTC)'
+    TIME_FORMAT = time.strftime("%d-%m-%Y")
+    #TIME_FORMAT = '%Y-%m-%d %H:%M:%S (UTC)'
 
     def format_report_html(self,):
         """Returns a string containing an incident report in HTML,
