@@ -29,7 +29,7 @@ class EmailOutputChannel(OutputChannel):
     CHANNEL = OUTPUT_CHANNEL_EMAIL
 
     DESCRIPTION = 'Canarytoken triggered'
-    TIME_FORMAT = time.strftime("%d-%m-%Y")
+    TIME_FORMAT = time.strftime("%d-%m-%Y %H:%M:%S")
     #TIME_FORMAT = '%Y-%m-%d %H:%M:%S (UTC)'
 
     def format_report_html(self,):
@@ -70,6 +70,10 @@ class EmailOutputChannel(OutputChannel):
 
 
     def get_basic_details(self,):
+        
+        print('*************************************************************************************')
+        print(self.data['time'])
+        print('*************************************************************************************')
 
         vars = { 'Description' : self.data['description'],
                  'Channel'     : self.data['channel'],
@@ -160,7 +164,7 @@ class EmailOutputChannel(OutputChannel):
     def mailjet_send(self, msg=None, canarydrop=None):
         try:
             mailjet = Client(auth=(settings.MAILJET_API_KEY, settings.MAILJET_API_SECRET), version='v3.1')
-            message = {
+            data = {
                 'Messages': [
                     {
                         "From": {
@@ -182,7 +186,7 @@ class EmailOutputChannel(OutputChannel):
             if settings.DEBUG:
                 pprint.pprint(message)
             else:
-                result = mailjet.send.create(data=message)
+                result = mailjet.send.create(data=data)
                 
             log.info('Sent alert to {recipient} for token {token}'\
                         .format(recipient=canarydrop['alert_email_recipient'],
