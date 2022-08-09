@@ -71,13 +71,9 @@ class EmailOutputChannel(OutputChannel):
 
     def get_basic_details(self,):
         
-        print('*************************************************************************************')
-        print(self.data['time'])
-        print('*************************************************************************************')
-
         vars = { 'Description' : self.data['description'],
                  'Channel'     : self.data['channel'],
-                 'Time'        : self.data['time'],
+                 'Time'        : TIME_FORMAT,
                  'Canarytoken' : self.data['canarytoken']
                 }
 
