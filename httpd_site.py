@@ -36,7 +36,6 @@ from mysql import make_canary_mysql_dump
 from authenticode import make_canary_authenticode_binary
 import settings
 import datetime
-from dateutil import tz
 import tempfile
 import hashlib
 import os
@@ -619,11 +618,9 @@ class HistoryPage(resource.Resource):
                 raise NoCanarytokenPresent()
             if canarydrop.get('triggered_list', None):
                 for timestamp in canarydrop['triggered_list'].keys():
-                    from_zone = tz.tzutc()
-                    to_zone = tz.tzlocal()
-                    utc = datetime.datetime.fromtimestamp(float(timestamp))
-                    utc = utc.replace(tzinfo=from_zone)
-                    formatted_timestamp = utc.astimezone(to_zone).strftime('%d %b %Y %H:%M:%S.%f')
+                    local_datetime = datetime.datetime.now()
+                    formatted_timestamp = float(local_datetime.strftime('%d %b %Y %H:%M:%S.%f')
+                   
                     
                     #formatted_timestamp = datetime.datetime.fromtimestamp(
                                 #float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
