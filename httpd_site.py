@@ -616,8 +616,12 @@ class HistoryPage(resource.Resource):
                 raise NoCanarytokenPresent()
             if canarydrop.get('triggered_list', None):
                 for timestamp in canarydrop['triggered_list'].keys():
+                    print(timestamp)
                     formatted_timestamp = datetime.datetime.fromtimestamp(
                                 float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
+                    local_datetime_converted = datetime.datetime.utcfromtimestamp(
+                                float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
+                    print(local_datetime_converted)
                     canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
 
             if canarydrop.get('memo'):
