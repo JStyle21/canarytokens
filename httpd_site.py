@@ -602,6 +602,7 @@ class ManagePage(resource.Resource):
 class HistoryPage(resource.Resource):
     isLeaf = True
 
+
     def getChild(self, name, request):
         if name == '':
             return self
@@ -609,6 +610,8 @@ class HistoryPage(resource.Resource):
 
     def render_GET(self, request):
         try:
+            from_zone = tz.tzutc()
+            to_zone = tz.tzlocal()
             token = request.args.get('token', None)[0]
             auth  = request.args.get('auth', None)[0]
             canarydrop = Canarydrop(**get_canarydrop(canarytoken=token))
@@ -616,8 +619,13 @@ class HistoryPage(resource.Resource):
                 raise NoCanarytokenPresent()
             if canarydrop.get('triggered_list', None):
                 for timestamp in canarydrop['triggered_list'].keys():
-                    formatted_timestamp = datetime.datetime.fromtimestamp(
-                                float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
+
+                    utc = datetime.datetime.fromtimestamp(float(utc_datetime_timestamp))
+                    utc = utc.replace(tzinfo=from_zone)
+                    formatted_timestamp = utc.astimezone(to_zone).strftime('%d %b %Y %H:%M:%S.%f')
+                    
+                    #formatted_timestamp = datetime.datetime.fromtimestamp(
+                                #float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
 
                     canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
 
