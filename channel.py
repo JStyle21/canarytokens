@@ -14,7 +14,6 @@ log = Logger()
 
 class Channel(object):
     CHANNEL = 'Base'
-    TIME_FORMAT = time.strftime("%d-%m-%Y %H:%M:%S")
 
     def __init__(self, switchboard=None, name=None):
         self.switchboard = switchboard
@@ -46,8 +45,7 @@ class InputChannel(Channel):
             host=settings.PUBLIC_IP
 
         payload['channel'] = self.name
-        payload['time'] = TIME_FORMAT
-        #payload['time'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S (UTC)")
+        payload['time'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S (UTC)")
         payload['memo'] = canarydrop.memo
         payload['manage_url'] = '{protocol}://{host}/manage?token={token}&auth={auth}'\
                                 .format(protocol=protocol,
@@ -86,6 +84,7 @@ class InputChannel(Channel):
     def format_canaryalert(self, canarydrop=None, protocol=settings.PROTOCOL,
                            host=settings.PUBLIC_DOMAIN, params=None, **kwargs):
         msg = {}
+        TIME_FORMAT = time.strftime("%d-%m-%Y %H:%M:%S")
         if not host or host == '':
             host=settings.PUBLIC_IP
 
@@ -101,7 +100,8 @@ class InputChannel(Channel):
         if 'src_ip' in kwargs:
             msg['src_ip'] = kwargs['src_ip']
 
-        msg['time'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S (UTC)")
+        msg['time'] = TIME_FORMAT
+        #msg['time'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S (UTC)")
         msg['channel'] = self.name
 
         if 'src_data' in kwargs and 'aws_keys_event_source_ip' in kwargs['src_data']:
