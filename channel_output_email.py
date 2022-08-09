@@ -70,10 +70,10 @@ class EmailOutputChannel(OutputChannel):
 
 
     def get_basic_details(self,):
-        
+
         vars = { 'Description' : self.data['description'],
                  'Channel'     : self.data['channel'],
-                 'Time'        : TIME_FORMAT,
+                 'Time'        : self.data['time'],
                  'Canarytoken' : self.data['canarytoken']
                 }
 

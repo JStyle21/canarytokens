@@ -3,6 +3,7 @@ Base class for all canarydrop channels.
 """
 
 import datetime
+import time
 
 import simplejson
 
@@ -13,6 +14,7 @@ log = Logger()
 
 class Channel(object):
     CHANNEL = 'Base'
+    TIME_FORMAT = time.strftime("%d-%m-%Y %H:%M:%S")
 
     def __init__(self, switchboard=None, name=None):
         self.switchboard = switchboard
@@ -44,7 +46,8 @@ class InputChannel(Channel):
             host=settings.PUBLIC_IP
 
         payload['channel'] = self.name
-        payload['time'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S (UTC)")
+        payload['time'] = TIME_FORMAT
+        #payload['time'] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S (UTC)")
         payload['memo'] = canarydrop.memo
         payload['manage_url'] = '{protocol}://{host}/manage?token={token}&auth={auth}'\
                                 .format(protocol=protocol,
