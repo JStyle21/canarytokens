@@ -56,7 +56,7 @@ def create_zip(name=None):
     return ZipFile(name, 'w')
 
 def write_file(zip=None, name=None, system=False, hidden=False, readonly=False,
-                archive=True, date_time=datetime.datetime.utcnow(), contents='', ):
+                archive=True, date_time=datetime.datetime.now(), contents='', ):
     mode = MODE_FILE
     mode |= MODE_HIDDEN if hidden else 0
     mode |= MODE_SYSTEM if system else 0
@@ -66,7 +66,7 @@ def write_file(zip=None, name=None, system=False, hidden=False, readonly=False,
     zip.writestr(entry, contents)
 
 def write_dir(zip=None, name=None, system=False, hidden=False, readonly=False,
-                archive=False, date_time=datetime.datetime.utcnow()):
+                archive=False, date_time=datetime.datetime.now()):
     mode = MODE_DIRECTORY
     mode |= MODE_HIDDEN if hidden else 0
     mode |= MODE_SYSTEM if system else 0
@@ -76,7 +76,7 @@ def write_dir(zip=None, name=None, system=False, hidden=False, readonly=False,
     zip.writestr(entry, '')
 
 def write_weird(zip=None, name=None, system=False, hidden=False, readonly=False,
-                archive=False, directory=False, date_time=datetime.datetime.utcnow(),
+                archive=False, directory=False, date_time=datetime.datetime.now(),
                 file=False, contents=''):
     mode = 0
     mode |= MODE_HIDDEN if hidden else 0

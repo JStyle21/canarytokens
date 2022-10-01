@@ -72,7 +72,7 @@ def lambda_handler(event, context):
                             'Domain': {'S': data.split('@@')[0]},
                             'AccessKey': {'S': final_resp['access_key_id']},
                             'Canarytoken': {'S': data.split('@@')[1]},
-                            'LastUsed': {'N': str(datetime.datetime.utcnow().strftime("%s"))}
+                            'LastUsed': {'N': str(datetime.datetime.now().strftime("%s"))}
                     }
                 )
                 print('DynamoDB response: {r}'.format(r=db_response))

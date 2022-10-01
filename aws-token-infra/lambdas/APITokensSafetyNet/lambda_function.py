@@ -38,7 +38,7 @@ def lambda_handler(event, context):
 
     f = StringIO(response['Content'].decode("utf-8"))
     reader = csv.DictReader(f, delimiter=',')
-    current_ts = datetime.utcnow().strftime("%s")
+    current_ts = datetime.now().strftime("%s")
     for row in reader:
         try:
             user = row['user']

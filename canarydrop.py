@@ -45,7 +45,7 @@ class Canarydrop(object):
             raise NoCanarytokenPresent()
 
         if 'timestamp' not in self._drop:
-            self._drop['timestamp'] = datetime.datetime.utcnow()\
+            self._drop['timestamp'] = datetime.datetime.now()\
                                         .strftime("%s.%f")
 
         if 'imgur_token' in self._drop and not self._drop['imgur_token']:
@@ -95,7 +95,7 @@ class Canarydrop(object):
         try:
             hit_time = hit_time or self._drop['hit_time']
         except:
-            hit_time = self._drop['hit_time'] = datetime.datetime.utcnow().strftime("%s.%f")
+            hit_time = self._drop['hit_time'] = datetime.datetime.now().strftime("%s.%f")
 
         if hit_time not in get_canarydrop_triggered_list(self.canarytoken):
             self.add_canarydrop_hit()

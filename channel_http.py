@@ -52,7 +52,7 @@ class CanarytokenPage(resource.Resource, InputChannel):
             if request.args.get('ts_key',[None])[0]:
                 canarydrop._drop['hit_time'] = request.args.get('ts_key', [None])[0]
             else:
-                canarydrop._drop['hit_time'] = datetime.datetime.utcnow().strftime("%s.%f")
+                canarydrop._drop['hit_time'] = datetime.datetime.now().strftime("%s.%f")
             useragent = request.getHeader('User-Agent')
             src_ip    = request.getHeader('x-forwarded-for')
             #location and refere are for cloned sites
@@ -112,7 +112,7 @@ class CanarytokenPage(resource.Resource, InputChannel):
             # otherwise, slack api token data perhaps
             #store the info and don't re-render
             if canarydrop._drop['type'] == 'slack_api':
-                canarydrop._drop['hit_time'] = datetime.datetime.utcnow().strftime("%s.%f")
+                canarydrop._drop['hit_time'] = datetime.datetime.now().strftime("%s.%f")
                 useragent = request.args.get('user_agent', [None])[0]
                 src_ip    = request.args.get('ip', [None])[0]
                 additional_info = {'Slack Log Data': {k:v for k,v in request.args.iteritems() if k not in ['user_agent', 'ip']}}
@@ -120,7 +120,7 @@ class CanarytokenPage(resource.Resource, InputChannel):
                 return self.GIF
 
             if canarydrop._drop['type'] == 'aws_keys':
-                canarydrop._drop['hit_time'] = datetime.datetime.utcnow().strftime("%s.%f")
+                canarydrop._drop['hit_time'] = datetime.datetime.now().strftime("%s.%f")
                 useragent = request.args.get('user_agent', [None])[0]
                 src_ip    = request.args.get('ip', [None])[0]
                 safety_net = request.args.get('safety_net', [None])[0]
@@ -137,7 +137,7 @@ class CanarytokenPage(resource.Resource, InputChannel):
             if key and token:
                 if key == 'aws_s3':
                     try:
-                        canarydrop._drop['hit_time'] = datetime.datetime.utcnow().strftime("%s.%f")
+                        canarydrop._drop['hit_time'] = datetime.datetime.now().strftime("%s.%f")
                         src_ip    = request.args['RemoteIP'][0]
                         additional_info = {'AWS Log Data': {k:v for k,v in request.args.iteritems() if k not in ['key','src_ip']}}
                         self.dispatch(canarydrop=canarydrop, src_ip=src_ip,

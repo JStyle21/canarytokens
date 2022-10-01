@@ -25,7 +25,7 @@ def lambda_handler(event, context):
     event = json.loads(gzip.GzipFile(fileobj=BytesIO (base64.b64decode(event['awslogs']['data']))).read())
     log_events = event['logEvents']
 
-    current_ts = datetime.datetime.utcnow().strftime("%s")
+    current_ts = datetime.datetime.now().strftime("%s")
     for log_event in log_events:
         print(log_event)
         if 'userIdentity' in log_event['message']:

@@ -115,7 +115,7 @@ def save_canarydrop(canarydrop=None):
 
     #if the canarydrop is new, save to the timeline
     if db.zscore(KEY_CANARYDROPS_TIMELINE, canarytoken.value()) == None:
-        current_time = datetime.datetime.utcnow().strftime("%s.%f")
+        current_time = datetime.datetime.now().strftime("%s.%f")
         db.zadd(KEY_CANARYDROPS_TIMELINE, current_time, canarytoken.value())
 
     if canarydrop['alert_email_recipient']:
@@ -147,7 +147,7 @@ def add_canarydrop_hit(canarytoken,input_channel,hit_time=None,**kwargs):
     """
     triggered_list = get_canarydrop_triggered_list(canarytoken)
 
-    triggered_key = hit_time if hit_time else datetime.datetime.utcnow().strftime("%s.%f")
+    triggered_key = hit_time if hit_time else datetime.datetime.now().strftime("%s.%f")
     triggered_list[triggered_key] = kwargs
     triggered_list[triggered_key]['input_channel'] = input_channel
     if kwargs.get('src_data', None) and 'aws_keys_event_source_ip' in kwargs['src_data']:
