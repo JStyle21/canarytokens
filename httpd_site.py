@@ -608,10 +608,10 @@ class HistoryPage(resource.Resource):
             return self
         return Resource.getChild(self, name, request)
     
-    def datetime_from_utc_to_local(utc_datetime):
-        now_timestamp = time.time()
-        offset = datetime.datetime.fromtimestamp(now_timestamp) - datetime.datetime.utcfromtimestamp(now_timestamp)
-        return utc_datetime + offset
+    #def datetime_from_utc_to_local(utc_datetime):
+        #now_timestamp = time.time()
+        #offset = datetime.datetime.fromtimestamp(now_timestamp) - datetime.datetime.utcfromtimestamp(now_timestamp)
+        #return utc_datetime + offset
 
     def render_GET(self, request):
         try:
@@ -622,13 +622,14 @@ class HistoryPage(resource.Resource):
             if not canarydrop['auth'] or canarydrop['auth'] != auth:
                 raise NoCanarytokenPresent()
             if canarydrop.get('triggered_list', None):
+                print(canarydrop)
                 for timestamp in canarydrop['triggered_list'].keys():
                     
                     #formatted_timestamp = datetime.datetime.fromtimestamp(
                                 #float(datetime_from_utc_to_local(timestamp))).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
                     #formatted_timestamp = datetime.datetime.fromtimestam(datetime_from_utc_to_local(float(timestamp))).strftime('%d %b %Y %H:%M:%S.%f (UTC2)')
                     formatted_timestamp = datetime.datetime.fromtimestamp(
-                                float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC3)')
+                                float(timestamp)).strftime('%d %b %Y %H:%M:%S.%f (UTC30)')
 
                     canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
 
