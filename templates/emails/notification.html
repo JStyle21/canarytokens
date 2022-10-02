@@ -40,6 +40,7 @@
                     <table width="100%">
                       <tr>
                         <td>
+                        <table>
                           <h1 style="text-align: center; font-weight: normal; font-size: 26px;">{{ Title }}</h1>
                           <table bgcolor="#E94B35" cellpadding="5" class="alert" style="text-align: center; color: #ffffff; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px;" width="100%">
                             <tr>
@@ -164,18 +165,35 @@
                 {% if ManageLink or HistoryLink %}
                                 <tr>
                                   <td>
+                                    <h2 style="font-size: 18px;">Canarytoken Management Details:</h2></td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <table class="data" style="border: 1px solid #cccccc; font-size: 14px; border-collapse: collapse;" width="100%">
+                                      <tr>
+                                       <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 120px; border: 1px solid #cccccc; padding: 5px;text-align: center;">More info on this token <a href="{{ HistoryLink }}">here</a></td> 
+                                      </tr>
+                                    </table>
                                   </td>
                                 </tr>
                 {% endif %}
                               </table>
                             </td>
                           </tr>
+                          </table>
                         </td>
                       </tr>
                     </table>
                   </td>
                 </tr>
                 <tr>
+                  <td class="footer" style="font-size: 12px; text-align: center; padding-top: 10px; color: #666666; min-width: 315px; max-width: 660px; padding-bottom: 10px;" width="100%">
+                    <table class="left" width="100%">
+                      <tr>
+                        <td>Powered by:<a href="https://canary.tools">Thinkst Canary</a></td>
+                      </tr>
+                    </table>
+                  </td>
                 </tr>
               </table>
 <!--              <a href="http://canarytokens.com" style="text-align: center"><img alt="Canary" width="100%" src="http://thinkst.com/images/tokens-banner.gif", _external=True)/></a>-->
