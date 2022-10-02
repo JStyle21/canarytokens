@@ -170,7 +170,6 @@ class EmailOutputChannel(OutputChannel):
                         "To": [
                             {
                                 "Email": canarydrop['alert_email_recipient'],
-                                "Name": ""
                             }
                         ],
                         "Subject": msg['subject'],
