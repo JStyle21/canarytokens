@@ -106,6 +106,12 @@
                                         <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails['SourceIP'] }}</code></td>
                                       </tr>
                       {% endif %}
+                      {% if BasicDetails['Location'] %}
+                                      <tr>
+                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Location</td>
+                                        <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails['Location'] | e}}</code></td>
+                                      </tr>
+                      {% endif %}
                       {% if BasicDetails['User-Agent'] %}
                                       <tr>
                                         <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">User Agent</td>
@@ -116,12 +122,6 @@
                                       <tr>
                                         <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Referer</td>
                                         <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails['Referer'] | e}}</code></td>
-                                      </tr>
-                      {% endif %}
-                      {% if BasicDetails['Location'] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Location</td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails['Location'] | e}}</code></td>
                                       </tr>
                       {% endif %}
                       {% if BasicDetails['Log4JComputerName'] %}
