@@ -119,62 +119,9 @@
                                         <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails['Location'] | e}}</code></td>
                                       </tr>
                       {% endif %}
-                      {% if BasicDetails['Log4JComputerName'] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Log4Shell Hostname</td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails['Log4JComputerName'] | e}}</code></td>
-                                      </tr>
-                      {% endif %}
-                      {% if BasicDetails['CanaryIP'] or BasicDetails['CanaryName'] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Canary</td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;">
-                                          <code>
-                                            {% if BasicDetails['CanaryIP'] %}{{ BasicDetails['CanaryIP'] }}{%endif%}
-                                            {% if BasicDetails['CanaryName'] %}({{BasicDetails['CanaryName'] | e}}
-                                              {%- if BasicDetails['CanaryID'] %}, ID:{{BasicDetails['CanaryID']}}{%endif-%}
-                                            ){%endif%}
-                                          </code></td>
-                                      </tr>
-		       {% endif %}
-		       {% if BasicDetails.get('CanaryLocation', '') %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Canary Location</td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;">
-                                          <code>
-                                            {{ BasicDetails['CanaryLocation'] | e}}
-                                          </code></td>
-                                      </tr>
-                      {% endif %}
-                      {% if BasicDetails[''] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;"></td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails[''] }}</code></td>
-                                      </tr>
-                      {% endif %}
-                      {% if BasicDetails[''] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;"></td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails[''] }}</code></td>
-                                      </tr>
-                      {% endif %}
                                     </table>
                                   </td>
                                 </tr>
-                {% if ManageLink or HistoryLink %}
-                                <tr>
-                                  <td><h2 style="font-size: 18px;">Canarytoken Management Details:</h2></td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                    <table class="data" style="border: 1px solid #cccccc; font-size: 14px; border-collapse: collapse;" width="100%">
-                                      <tr>
-                                       <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 120px; border: 1px solid #cccccc; padding: 5px;text-align: center;">More info on this token <a href="{{ HistoryLink }}">here</a></td> 
-                                      </tr>
-                                    </table>
-                                  </td>
-                                </tr>
-                {% endif %}
                               </table>
                             </td>
                           </tr>
@@ -183,17 +130,7 @@
                     </table>
                   </td>
                 </tr>
-                <tr>
-                  <td class="footer" style="font-size: 12px; text-align: center; padding-top: 10px; color: #666666; min-width: 315px; max-width: 660px; padding-bottom: 10px;" width="100%">
-                    <table class="left" width="100%">
-                      <tr>
-                        <td>Powered by:<a href="https://canary.tools">Thinkst Canary</a>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
               </table>
-<!--              <a href="http://canarytokens.com" style="text-align: center"><img alt="Canary" width="100%" src="http://thinkst.com/images/tokens-banner.gif", _external=True)/></a>-->
             </td>
           </tr>
         </table>
