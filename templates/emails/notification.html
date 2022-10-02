@@ -119,53 +119,15 @@
                                         <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails['Location'] | e}}</code></td>
                                       </tr>
                       {% endif %}
-                      {% if BasicDetails['Log4JComputerName'] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Log4Shell Hostname</td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails['Log4JComputerName'] | e}}</code></td>
-                                      </tr>
-                      {% endif %}
-                      {% if BasicDetails['CanaryIP'] or BasicDetails['CanaryName'] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Canary</td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;">
-                                          <code>
-                                            {% if BasicDetails['CanaryIP'] %}{{ BasicDetails['CanaryIP'] }}{%endif%}
-                                            {% if BasicDetails['CanaryName'] %}({{BasicDetails['CanaryName'] | e}}
-                                              {%- if BasicDetails['CanaryID'] %}, ID:{{BasicDetails['CanaryID']}}{%endif-%}
-                                            ){%endif%}
-                                          </code></td>
-                                      </tr>
-		       {% endif %}
-		       {% if BasicDetails.get('CanaryLocation', '') %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;">Canary Location</td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;">
-                                          <code>
-                                            {{ BasicDetails['CanaryLocation'] | e}}
-                                          </code></td>
-                                      </tr>
-                      {% endif %}
-                      {% if BasicDetails[''] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;"></td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails[''] }}</code></td>
-                                      </tr>
-                      {% endif %}
-                      {% if BasicDetails[''] %}
-                                      <tr>
-                                        <td class="label" style="background: #eeeeee; font-weight: bold; _border: none; width: 180px; border: 1px solid #cccccc; padding: 5px;"></td>
-                                        <td style="border: 1px solid #cccccc; padding: 5px;"><code>{{ BasicDetails[''] }}</code></td>
-                                      </tr>
-                      {% endif %}
+
                                     </table>
                                   </td>
                                 </tr>
                 {% if ManageLink or HistoryLink %}
                                 <tr>
-                                  <td>
-                                    <h2 style="font-size: 18px;">Canarytoken Management Details:</h2></td>
+                                  <td><h2 style="font-size: 18px;">Canarytoken Management Details:</h2></td>
                                 </tr>
+                                
                                 <tr>
                                   <td>
                                     <table class="data" style="border: 1px solid #cccccc; font-size: 14px; border-collapse: collapse;" width="100%">
