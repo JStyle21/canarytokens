@@ -528,7 +528,7 @@ class ManagePage(resource.Resource):
             if canarydrop.get('triggered_list', None):
                 for timestamp in canarydrop['triggered_list'].keys():
                     formatted_timestamp = datetime.datetime.fromtimestamp(
-                                float(timestamp)).strftime('%Y-%m-%d %H:%M:%S.%f (Israel)')
+                                float(timestamp)).strftime('%Y-%m-%d %H:%M:%S.%f IST')
                     canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
 
         except (TypeError, NoCanarytokenPresent):
@@ -621,7 +621,7 @@ class HistoryPage(resource.Resource):
                 for timestamp in canarydrop['triggered_list'].keys():
                     
                     formatted_timestamp = datetime.datetime.fromtimestamp(
-                                float(timestamp)).strftime('%Y-%m-%d %H:%M:%S.%f (Israel)')
+                                float(timestamp)).strftime('%Y-%m-%d %H:%M:%S.%f IST')
 
                     canarydrop['triggered_list'][formatted_timestamp] = canarydrop['triggered_list'].pop(timestamp)
 
